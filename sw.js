@@ -1,8 +1,8 @@
 // import
 importScripts('js/sw-utils.js');
 
-const CACHE_STATIC_NAME  = 'static-v1';
-const CACHE_DYNAMIC_NAME = 'dynamic-v1';
+const CACHE_STATIC_NAME  = 'static-v2';
+const CACHE_DYNAMIC_NAME = 'dynamic-v2';
 const CACHE_INMUTABLE_NAME = 'inmutable-v1';
 
 const CACHE_DYNAMIC_LIMIT = 50;
@@ -49,6 +49,10 @@ self.addEventListener('activate', e => {
         keys.forEach( key => {
 
             if ( key !== CACHE_STATIC_NAME && key.includes('static') ) {
+                return caches.delete(key);
+            }
+           
+            if ( key !== CACHE_DYNAMIC_NAME && key.includes('dynamic') ) {
                 return caches.delete(key);
             }
         });
